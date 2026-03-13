@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biografías BTS - ETER KPOP MX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Nunito',Arial;
+margin:0;
+background:#121212;
+color:white;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:8px 20px;
+background: linear-gradient(90deg,#7b5cff,#b44cff);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:8px;
+font-weight:bold;
+font-size:20px;
+}
+
+.logo img{
+height:22px;
+width:22px;
+border-radius:4px;
+}
+
+.centerText{
+flex:1;
+text-align:center;
+font-size:14px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:16px;
+font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+text-align:center;
+padding:80px 20px;
+background-image:url('https://wallpapers.com/images/featured/bts-en-el-escritorio-l3on1awzobm1tqaj.jpg');
+background-size:cover;
+background-position:center;
+color:white;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,0.5);
+z-index:0;
+}
+
+.hero h1,.hero p{
+position:relative;
+z-index:1;
+text-shadow:2px 2px 6px rgba(0,0,0,0.8);
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+color:#f0f0f0;
+}
+
+/* SECCION */
+
+section{
+padding:60px 20px;
+max-width:1000px;
+margin:auto;
+}
+
+.card{
+background:#1f1f1f;
+padding:30px;
+border-radius:12px;
+}
+
+/* BOTONES */
+
+.member{
+margin-bottom:18px;
+}
+
+.memberButtons{
+display:flex;
+gap:10px;
+}
+
+.memberBtn{
+flex:1;
+background:linear-gradient(90deg,#7b5cff,#b44cff);
+border:none;
+padding:14px;
+border-radius:10px;
+color:white;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+text-align:left;
+}
+
+.moreBtn{
+background:#6a4cff;
+border:none;
+padding:12px 16px;
+border-radius:10px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* BIO */
+
+.bio{
+background:#2a2a2a;
+margin-top:6px;
+border-radius:8px;
+overflow:hidden;
+max-height:0;
+padding:0 16px;
+transition:max-height .5s ease,padding .4s ease;
+}
+
+.bio.open{
+padding:16px;
+}
+
+/* FOOTER */
+
+footer{
+background:#1c1c26;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="https://yt3.ggpht.com/rGD4n7Nq_CQfuIV0Ig_iIIbv30gVoKEcqcn1tsbWKZVWBA9Ni1W5TVhp5vRMKplK0uBK7S4Ikw=s600-c-k-c0x00ffffff-no-rj-rp-mo">
+<span>ETER KPOP MX</span>
+</div>
+
+<div class="centerText">
+Descubre contenido, productos y más sobre BTS y el mundo K-POP
+</div>
+
+<nav>
+<a href="index.html">Inicio</a>
+<a href="tienda.html">Tienda</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Biografías de BTS</h1>
+
+<p>
+Conoce la historia de cada integrante del grupo y su impacto en el K-Pop global.
+</p>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2>Integrantes de BTS</h2>
+
+<!-- RM -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">RM</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/1NrWC3na6x/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+RM, cuyo nombre real es Kim Namjoon, nació el 12 de septiembre de 1994 en Ilsan, Corea del Sur. 
+Es el líder de BTS y uno de los principales raperos, compositores y productores del grupo. 
+Desde muy joven destacó por su inteligencia y habilidades académicas, especialmente en el 
+aprendizaje de idiomas. De hecho, aprendió gran parte de su inglés viendo la serie Friends, 
+lo que más adelante le permitió convertirse en el portavoz principal del grupo en entrevistas 
+y eventos internacionales.
+
+Antes de debutar en BTS, RM participaba activamente en la escena underground del hip-hop coreano 
+bajo el nombre de "Runch Randa". Durante esa etapa desarrolló su estilo lírico y su capacidad 
+para escribir letras profundas que hablan sobre identidad, presión social, sueños y crecimiento 
+personal. Dentro de BTS ha sido uno de los principales responsables de la dirección artística 
+del grupo, participando en la composición de numerosas canciones.
+
+Además de su trabajo con BTS, RM ha lanzado proyectos en solitario donde explora un estilo más 
+personal y reflexivo. También es conocido por su interés en el arte, los museos y la literatura, 
+lo que ha influido en su forma de escribir música.
+</p>
+</div>
+</div>
+
+<!-- JIN -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">Jin</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/16a72Fn6FZ/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+Jin, cuyo nombre real es Kim Seokjin, nació el 4 de diciembre de 1992 en Gwacheon, Corea del Sur. 
+Es el integrante mayor de BTS y uno de los vocalistas principales del grupo. Antes de ingresar 
+a la industria musical estudiaba actuación en la Universidad de Konkuk, lo que contribuyó a 
+su gran presencia escénica y su capacidad para conectar con el público.
+
+Su voz se caracteriza por su tono claro y emocional, lo que lo convierte en una pieza clave 
+en muchas de las baladas del grupo. A lo largo de su carrera ha participado en la composición 
+de algunas canciones y ha lanzado música en solitario que ha sido muy bien recibida por los fans.
+
+Jin también es famoso por su sentido del humor y su personalidad cercana. Su famoso apodo 
+"Worldwide Handsome" surgió de una presentación donde él mismo se describió así con humor, 
+y desde entonces se convirtió en una de sus marcas personales dentro del fandom.
+</p>
+</div>
+</div>
+
+<!-- SUGA -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">Suga</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/1G7NfyBrZk/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+Suga, cuyo nombre real es Min Yoongi, nació el 9 de marzo de 1993 en Daegu, Corea del Sur. 
+Es rapero, compositor y productor musical. Antes de debutar con BTS ya trabajaba produciendo 
+música para artistas locales y participando en la escena hip-hop underground.
+
+Dentro de BTS se ha destacado como uno de los principales productores del grupo, contribuyendo 
+a la creación de muchas de sus canciones. Su estilo musical suele ser introspectivo y aborda 
+temas como la salud mental, la presión social y las dificultades personales.
+
+Además de su trabajo con BTS, Suga desarrolla su carrera en solitario bajo el nombre de 
+Agust D, donde explora un estilo más crudo y directo dentro del hip-hop.
+</p>
+</div>
+</div>
+
+<!-- JHOPE -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">J-Hope</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/1ELQofGJPr/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+J-Hope, cuyo nombre real es Jung Hoseok, nació el 18 de febrero de 1994 en Gwangju, Corea del Sur. 
+Es conocido como el bailarín principal del grupo y uno de los raperos. Antes de debutar en BTS 
+era reconocido por su talento en la danza urbana y participó en diversas competencias de baile.
+
+Dentro del grupo es una figura clave en el desarrollo de coreografías y en la energía que 
+transmiten las presentaciones en vivo. Su estilo musical suele ser más brillante y optimista, 
+mezclando hip-hop, funk y elementos electrónicos.
+
+En su carrera en solitario ha lanzado proyectos musicales que muestran su creatividad 
+y su identidad artística independiente.
+</p>
+</div>
+</div>
+
+<!-- JIMIN -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">Jimin</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/1HTDPM3UBB/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+Jimin, cuyo nombre completo es Park Jimin, nació el 13 de octubre de 1995 en Busan, Corea del Sur. 
+Es vocalista y uno de los bailarines principales de BTS. Antes de ingresar al grupo estudió 
+danza contemporánea en la Busan High School of Arts, lo que le dio una base técnica muy fuerte.
+
+Su estilo se caracteriza por movimientos elegantes, gran control corporal y una fuerte capacidad 
+para transmitir emociones en el escenario. A lo largo de su carrera ha participado en la creación 
+de varias canciones del grupo y también ha lanzado música como solista.
+
+Su presencia escénica y su estilo vocal lo han convertido en uno de los integrantes más 
+destacados del grupo.
+</p>
+</div>
+</div>
+
+<!-- V -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">V</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/1G4get8Dmo/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+V, cuyo nombre real es Kim Taehyung, nació el 30 de diciembre de 1995 en Daegu, Corea del Sur. 
+Es uno de los vocalistas del grupo y es conocido por su voz profunda y distintiva. Su estilo 
+musical aporta un color único al sonido de BTS.
+
+Además de la música, V tiene interés en diferentes formas de arte como la fotografía, 
+la actuación y el diseño visual. También ha participado en proyectos de actuación y 
+ha mostrado su talento artístico en múltiples disciplinas.
+
+Su personalidad carismática y su creatividad lo han convertido en uno de los miembros 
+más reconocidos del grupo a nivel mundial.
+</p>
+</div>
+</div>
+
+<!-- JUNGKOOK -->
+
+<div class="member">
+<div class="memberButtons">
+<button class="memberBtn" onclick="toggleBio(this)">Jungkook</button>
+<a class="moreBtn" href="https://web.facebook.com/share/r/18DmMVRS3T/" target="_blank">Saber más</a>
+</div>
+
+<div class="bio">
+<p>
+Jungkook, cuyo nombre completo es Jeon Jungkook, nació el 1 de septiembre de 1997 en Busan, 
+Corea del Sur. Es el integrante más joven de BTS y es conocido dentro del grupo como el 
+"Golden Maknae" debido a su talento en múltiples áreas.
+
+Destaca por su habilidad en el canto, el baile y la producción musical. Desde su debut ha 
+demostrado una gran capacidad para adaptarse a diferentes estilos musicales y coreográficos.
+
+También ha lanzado música en solitario que ha tenido gran éxito internacional, consolidándose 
+como uno de los artistas jóvenes más influyentes dentro del K-Pop.
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 DEDIKA STUDIO</p>
+</footer>
+
+<script>
+
+function toggleBio(button){
+
+const bio = button.parentElement.nextElementSibling;
+
+if(bio.classList.contains("open")){
+bio.style.maxHeight=null;
+bio.classList.remove("open");
+}else{
+bio.style.maxHeight=bio.scrollHeight+"px";
+bio.classList.add("open");
+}
+
+}
+
+</script>
+
+</body>
+</html>
+
