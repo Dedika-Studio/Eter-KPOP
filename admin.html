@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - ETER KPOP MX</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family:'Nunito',Arial; margin:0; background:#121212; color:#fff; }
+a { color:#7b5cff; text-decoration:none; }
+
+.navbar { display:flex; align-items:center; justify-content:space-between; background:#1f1f1f; padding:12px 24px; border-bottom:1px solid #333; }
+.navbar .logo { font-weight:bold; font-size:18px; display:flex; align-items:center; gap:8px; }
+.navbar .logo img { height:24px; width:24px; border-radius:4px; object-fit:cover; }
+.navbar nav a { margin-left:16px; font-weight:bold; font-size:14px; }
+
+.container { max-width:800px; margin:30px auto; background:#1f1f1f; padding:30px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,.5); }
+label { font-weight:bold; display:block; margin-top:15px; }
+input, textarea, select { width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #444; background:#222; color:#fff; box-sizing:border-box; }
+input:focus, textarea:focus, select:focus { outline:none; border-color:#7b5cff; }
+
+button { margin-top:20px; padding:12px 20px; border:none; background:#7b5cff; color:white; font-weight:bold; border-radius:8px; cursor:pointer; }
+button:hover { opacity:.9; }
+
+.preview { margin-top:20px; padding:20px; background:#181818; border-radius:12px; display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+
+.product-preview {
+  background:#faf7ff;
+  color:#222;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  width:100%;
+  max-width:260px;
+  min-height:320px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  margin:auto;
+  box-sizing:border-box;
+  position: relative;
+}
+.product-preview img { width:100%; height:140px; object-fit:cover; border-radius:8px; }
+.product-preview h3 { margin:12px 0 8px 0; font-size:16px; }
+.product-preview p { font-size:14px; color:#444; }
+.product-preview .price { font-size:20px; font-weight:bold; margin:10px 0; color:#8b7cff; }
+.product-preview .badge { background:#ff4d4d; color:white; padding:4px 8px; border-radius:6px; font-size:12px; display:inline-block; margin-bottom:8px; }
+.delete-btn { background:#ff4d4d; color:white; padding:6px 10px; border-radius:6px; font-size:12px; margin-top:6px; cursor:pointer; }
+.delete-btn:hover { opacity:.8; }
+</style>
+</head>
+<body>
+
+<script>
+// CLAVE DE ACCESO
+const clave = "panochonas12";
+let intentos = 0;
+
+function solicitarClave() {
+  if(sessionStorage.getItem("adminAutorizado") === "true") return;
+  let pass = prompt("Introduce la clave de acceso a Admin:");
+  if(pass === clave){
+    sessionStorage.setItem("adminAutorizado","true");
+  } else {
+    intentos++;
+    alert("Clave incorrecta.");
+    if(intentos < 3){
+      solicitarClave();
+    } else {
+      alert("No tienes permiso para entrar.");
+      window.location.href = "index.html";
+    }
+  }
+}
+solicitarClave();
+</script>
+
+<div class="navbar">
+  <div class="logo">
+    <img src="https://yt3.ggpht.com/rGD4n7Nq_CQfuIV0Ig_iIIbv30gVoKEcqcn1tsbWKZVWBA9Ni1W5TVhp5vRMKplK0uBK7S4Ikw=s600-c-k-c0x00ffffff-no-rj-rp-mo" />
+    ETER KPOP MX Admin
+  </div>
+  <nav>
+    <a href="#">Dashboard</a>
+    <a href="#">Herramientas</a>
+    <a href="#">Configuración</a>
+  </nav>
+</div>
+
+<div class="container">
+<h1>Generador de productos</h1>
+
+<label>Título del producto</label>
+<input id="titulo">
+<label>Descripción</label>
+<textarea id="descripcion"></textarea>
+<label>Link del producto</label>
+<input id="link">
+<label>Link de imagen</label>
+<input id="imagen">
+<label>Precio (solo número)</label>
+<input id="precio">
+<label>Calificación (ejemplo: 4.6)</label>
+<input id="rating">
+<label>Número de calificaciones</label>
+<input id="reviews">
+<label>Badge (opcional)</label>
+<select id="badge">
+  <option value="">Ninguno</option>
+  <option value="Nuevo">Nuevo</option>
+  <option value="Popular">Popular</option>
+  <option value="Recomendado">Recomendado</option>
+</select>
+
+<button onclick="generar()">Generar producto</button>
+<button onclick="borrarTodo()" style="background:#ff4d4d;margin-left:10px;">Borrar todo</button>
+
+<h2>Vista previa de productos</h2>
+<div class="preview" id="preview"></div>
+
+</div>
+
+<script>
+let productos = JSON.parse(localStorage.getItem('productos')) || []
+
+function generar(){
+  let titulo = document.getElementById("titulo").value
+  let descripcion = document.getElementById("descripcion").value
+  let link = document.getElementById("link").value
+  let imagen = document.getElementById("imagen").value
+  let precio = document.getElementById("precio").value
+  let rating = parseFloat(document.getElementById("rating").value)
+  let reviews = document.getElementById("reviews").value
+  let badge = document.getElementById("badge").value
+
+  if(!titulo || !link || !imagen || !precio){ alert("Llena los campos obligatorios"); return; }
+
+  let producto = { titulo, descripcion, link, imagen, precio, rating, reviews, badge }
+  productos.push(producto)
+  localStorage.setItem('productos', JSON.stringify(productos))
+
+  actualizarVista()
+}
+
+function actualizarVista(){
+  let html = ''
+  productos.slice().reverse().forEach((p,index) => {
+    html += `
+<div class="product-preview">
+  ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+  <img src="${p.imagen}" alt="${p.titulo}" />
+  <h3>${p.titulo}</h3>
+  <p>${p.descripcion}</p>
+  <div style="font-size:18px;color:#ffd700;margin:8px 0;">
+    ${Array.from({length:5},(_,i)=>(p.rating>=i+1?'★':p.rating>=i+0.5?'☆':'☆')).join('')} 
+    <span style="color:#ccc;font-size:14px;">(${p.rating} • ${p.reviews} calificaciones)</span>
+  </div>
+  <div class="price">$${p.precio} MXN</div>
+  <a href="${p.link}" target="_blank"><button>Ver en Mercado Libre</button></a>
+  <button class="delete-btn" onclick="borrarProducto(${productos.length-1-index})">Eliminar</button>
+</div>
+    `
+  })
+  document.getElementById('preview').innerHTML = html
+}
+
+// Borrar un producto específico
+function borrarProducto(index){
+  if(confirm("¿Deseas eliminar este producto?")){
+    productos.splice(index,1)
+    localStorage.setItem('productos', JSON.stringify(productos))
+    actualizarVista()
+  }
+}
+
+// Borrar todos los productos
+function borrarTodo(){
+  if(confirm("¿Deseas eliminar TODOS los productos?")){
+    productos = []
+    localStorage.removeItem('productos')
+    actualizarVista()
+  }
+}
+
+// Cargar productos guardados al abrir la página
+window.onload = actualizarVista
+</script>
+
+</body>
+</html>
