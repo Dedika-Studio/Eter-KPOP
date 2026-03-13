@@ -13,6 +13,7 @@ body {
   background:#121212;
   color:#fff;
 }
+
 header {
   background:linear-gradient(90deg,#7b5cff,#b44cff);
   padding:8px 20px;
@@ -56,11 +57,11 @@ section {
 }
 
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
-  justify-content:center;
-  align-items:stretch; /* asegura que todas las tarjetas tengan la misma altura */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* siempre 3 tarjetas por fila */
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch; /* tarjetas de igual altura */
 }
 
 /* PRODUCTO */
@@ -70,12 +71,14 @@ section {
   padding:18px;
   border-radius:14px;
   text-align:center;
-  transition:transform .2s,box-shadow .2s;
+  transition: transform .2s, box-shadow .2s;
   box-sizing:border-box;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   height:100%;
+  max-width:300px; /* ancho máximo de la tarjeta */
+  margin:auto; /* centra en la columna */
 }
 
 .product:hover {
@@ -93,20 +96,20 @@ section {
 .product h3 {
   margin:12px 0 8px 0;
   font-size:16px;
-  min-height:40px;
+  min-height:40px; /* espacio uniforme para títulos */
 }
 
 .product p {
   font-size:14px;
   color:#444;
   margin:8px 0;
-  min-height:60px; /* espacio mínimo para que las tarjetas cortas no se vean chicas */
+  min-height:60px; /* espacio mínimo si es muy corto */
   overflow:hidden;
   display:-webkit-box;
-  -webkit-line-clamp:4; /* límite de líneas */
+  -webkit-line-clamp:4; /* máximo de 4 líneas */
   -webkit-box-orient:vertical;
   text-overflow:ellipsis;
-  flex-grow:1; /* hace que todas las descripciones ocupen el espacio disponible */
+  flex-grow:1; /* ocupa el espacio disponible */
 }
 
 .stars {
