@@ -23,31 +23,11 @@ input:focus, textarea:focus, select:focus { outline:none; border-color:#7b5cff; 
 button { margin-top:20px; padding:12px 20px; border:none; background:#7b5cff; color:white; font-weight:bold; border-radius:8px; cursor:pointer; }
 button:hover { opacity:.9; }
 
-.preview { margin-top:20px; padding:20px; background:#181818; border-radius:12px; display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.preview { margin-top:20px; padding:20px; background:#181818; border-radius:12px; display:flex; flex-direction:column; gap:20px; }
 
-.product-preview {
-  background:#faf7ff;
-  color:#222;
-  padding:18px;
-  border-radius:14px;
-  text-align:center;
-  width:100%;
-  max-width:260px;
-  min-height:320px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  margin:auto;
-  box-sizing:border-box;
-  position: relative;
-}
-.product-preview img { width:100%; height:140px; object-fit:cover; border-radius:8px; }
-.product-preview h3 { margin:12px 0 8px 0; font-size:16px; }
-.product-preview p { font-size:14px; color:#444; }
-.product-preview .price { font-size:20px; font-weight:bold; margin:10px 0; color:#8b7cff; }
-.product-preview .badge { background:#ff4d4d; color:white; padding:4px 8px; border-radius:6px; font-size:12px; display:inline-block; margin-bottom:8px; }
-.delete-btn { background:#ff4d4d; color:white; padding:6px 10px; border-radius:6px; font-size:12px; margin-top:6px; cursor:pointer; }
-.delete-btn:hover { opacity:.8; }
+.code-box { background:#222; padding:10px; border-radius:8px; font-family:monospace; white-space:pre-wrap; position:relative; }
+.copy-btn { position:absolute; top:10px; right:10px; background:#7b5cff; color:#fff; border:none; padding:4px 8px; border-radius:6px; cursor:pointer; }
+.copy-btn:hover { opacity:.9; }
 </style>
 </head>
 <body>
@@ -89,7 +69,7 @@ solicitarClave();
 </div>
 
 <div class="container">
-<h1>Generador de productos</h1>
+<h1>Generador de productos (para copiar a tienda.html)</h1>
 
 <label>Título del producto</label>
 <input id="titulo">
@@ -113,78 +93,57 @@ solicitarClave();
   <option value="Recomendado">Recomendado</option>
 </select>
 
-<button onclick="generar()">Generar producto</button>
-<button onclick="borrarTodo()" style="background:#ff4d4d;margin-left:10px;">Borrar todo</button>
+<button onclick="generar()">Generar código HTML</button>
 
-<h2>Vista previa de productos</h2>
+<h2>HTML del producto</h2>
 <div class="preview" id="preview"></div>
 
 </div>
 
 <script>
-let productos = JSON.parse(localStorage.getItem('productos')) || []
-
 function generar(){
-  let titulo = document.getElementById("titulo").value
-  let descripcion = document.getElementById("descripcion").value
-  let link = document.getElementById("link").value
-  let imagen = document.getElementById("imagen").value
-  let precio = document.getElementById("precio").value
+  let titulo = document.getElementById("titulo").value.trim()
+  let descripcion = document.getElementById("descripcion").value.trim()
+  let link = document.getElementById("link").value.trim()
+  let imagen = document.getElementById("imagen").value.trim()
+  let precio = document.getElementById("precio").value.trim()
   let rating = parseFloat(document.getElementById("rating").value)
-  let reviews = document.getElementById("reviews").value
+  let reviews = document.getElementById("reviews").value.trim()
   let badge = document.getElementById("badge").value
 
   if(!titulo || !link || !imagen || !precio){ alert("Llena los campos obligatorios"); return; }
 
-  let producto = { titulo, descripcion, link, imagen, precio, rating, reviews, badge }
-  productos.push(producto)
-  localStorage.setItem('productos', JSON.stringify(productos))
-
-  actualizarVista()
-}
-
-function actualizarVista(){
-  let html = ''
-  productos.slice().reverse().forEach((p,index) => {
-    html += `
-<div class="product-preview">
-  ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
-  <img src="${p.imagen}" alt="${p.titulo}" />
-  <h3>${p.titulo}</h3>
-  <p>${p.descripcion}</p>
-  <div style="font-size:18px;color:#ffd700;margin:8px 0;">
-    ${Array.from({length:5},(_,i)=>(p.rating>=i+1?'★':p.rating>=i+0.5?'☆':'☆')).join('')} 
-    <span style="color:#ccc;font-size:14px;">(${p.rating} • ${p.reviews} calificaciones)</span>
-  </div>
-  <div class="price">$${p.precio} MXN</div>
-  <a href="${p.link}" target="_blank"><button>Ver en Mercado Libre</button></a>
-  <button class="delete-btn" onclick="borrarProducto(${productos.length-1-index})">Eliminar</button>
-</div>
-    `
-  })
-  document.getElementById('preview').innerHTML = html
-}
-
-// Borrar un producto específico
-function borrarProducto(index){
-  if(confirm("¿Deseas eliminar este producto?")){
-    productos.splice(index,1)
-    localStorage.setItem('productos', JSON.stringify(productos))
-    actualizarVista()
+  // Generar estrellas
+  let estrellas = ''
+  for(let i=0;i<5;i++){
+    if(rating>=i+1) estrellas += '★'
+    else if(rating>=i+0.5) estrellas += '☆'
+    else estrellas += '☆'
   }
+
+  // HTML del producto
+  let html = `<div class="product">
+${badge?`<span class="badge">${badge}</span>`:''}
+<img src="${imagen}" alt="${titulo}" />
+<h3>${titulo}</h3>
+<p>${descripcion}</p>
+<div class="stars">${estrellas} <span style="color:#ccc;font-size:14px;">(${rating} • ${reviews} calificaciones)</span></div>
+<div class="price">$${precio} MXN</div>
+<a href="${link}" target="_blank"><button>Ver en Mercado Libre</button></a>
+</div>`
+
+  // Mostrar en la preview con botón de copiar
+  const preview = document.getElementById("preview")
+  preview.innerHTML = `<div class="code-box" id="code-box">${html}<button class="copy-btn" onclick="copiar()">Copiar</button></div>`
 }
 
-// Borrar todos los productos
-function borrarTodo(){
-  if(confirm("¿Deseas eliminar TODOS los productos?")){
-    productos = []
-    localStorage.removeItem('productos')
-    actualizarVista()
-  }
+// Copiar el código al portapapeles
+function copiar(){
+  const code = document.getElementById("code-box").innerText
+  navigator.clipboard.writeText(code)
+    .then(()=>alert("Código copiado al portapapeles"))
+    .catch(()=>alert("Error al copiar"))
 }
-
-// Cargar productos guardados al abrir la página
-window.onload = actualizarVista
 </script>
 
 </body>
