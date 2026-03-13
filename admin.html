@@ -46,7 +46,7 @@ button:hover { opacity:.9; }
 .product-preview .price { font-size:20px; font-weight:bold; margin:10px 0; color:#8b7cff; }
 .product-preview .badge { background:#ff4d4d; color:white; padding:4px 8px; border-radius:6px; font-size:12px; display:inline-block; margin-bottom:8px; }
 .code-box { background:#222; padding:10px; border-radius:8px; font-family:monospace; white-space:pre-wrap; position:relative; margin-top:20px; }
-.copy-btn { position:absolute; top:10px; right:10px; background:#7b5cff; color:#fff; border:none; padding:4px 8px; border-radius:6px; cursor:pointer; }
+.copy-btn { margin-top:10px; padding:8px 14px; background:#7b5cff; color:#fff; border:none; border-radius:6px; cursor:pointer; }
 .copy-btn:hover { opacity:.9; }
 </style>
 </head>
@@ -56,7 +56,6 @@ button:hover { opacity:.9; }
 // CLAVE DE ACCESO
 const clave = "panochonas12";
 let intentos = 0;
-
 function solicitarClave() {
   if(sessionStorage.getItem("adminAutorizado") === "true") return;
   let pass = prompt("Introduce la clave de acceso a Admin:");
@@ -121,13 +120,13 @@ solicitarClave();
 
 <h2>HTML listo para copiar</h2>
 <div id="htmlOutput"></div>
+<button class="copy-btn" onclick="copiarHTML()">Copiar HTML</button>
 
 </div>
 
 <script>
 let productoActual = null;
 
-// Generar la vista previa
 function vistaPrevia(){
   const titulo = document.getElementById("titulo").value.trim()
   const descripcion = document.getElementById("descripcion").value.trim()
@@ -160,10 +159,9 @@ ${badge?`<span class="badge">${badge}</span>`:''}
 </div>`
 
   document.getElementById("preview").innerHTML = htmlPreview
-  document.getElementById("htmlOutput").innerHTML = '' // limpiar HTML generado
+  document.getElementById("htmlOutput").innerText = '' // limpiar HTML generado
 }
 
-// Generar HTML listo para copiar
 function generarHTML(){
   if(!productoActual){ alert("Primero haz vista previa"); return; }
 
@@ -175,19 +173,14 @@ ${productoActual.badge?`<span class="badge">${productoActual.badge}</span>`:''}
 <div class="stars">${productoActual.estrellas} <span style="color:#ccc;font-size:14px;">(${productoActual.rating} • ${productoActual.reviews} calificaciones)</span></div>
 <div class="price">$${productoActual.precio} MXN</div>
 <a href="${productoActual.link}" target="_blank"><button>Ver en Mercado Libre</button></a>
-</div>
-<div class="code-box">
-<button class="copy-btn" onclick="copiarHTML()">Copiar código</button>
-<pre>${html.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
 </div>`
 
-  document.getElementById("htmlOutput").innerHTML = html
+  document.getElementById("htmlOutput").innerText = html
 }
 
-// Copiar el HTML al portapapeles
 function copiarHTML(){
-  const code = document.querySelector("#htmlOutput pre")
-  if(!code){ alert("No hay código para copiar"); return; }
+  const code = document.getElementById("htmlOutput")
+  if(!code.innerText){ alert("Primero genera el HTML"); return; }
   navigator.clipboard.writeText(code.innerText)
     .then(()=>alert("Código copiado al portapapeles"))
     .catch(()=>alert("Error al copiar"))
