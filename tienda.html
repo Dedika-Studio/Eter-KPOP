@@ -60,6 +60,7 @@ section {
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
   justify-content:center;
+  align-items:stretch; /* asegura que todas las tarjetas tengan la misma altura */
 }
 
 /* PRODUCTO */
@@ -71,13 +72,10 @@ section {
   text-align:center;
   transition:transform .2s,box-shadow .2s;
   box-sizing:border-box;
-  width:100%;
-  max-width:260px;
-  min-height:420px; /* altura uniforme */
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  margin:auto;
+  height:100%;
 }
 
 .product:hover {
@@ -87,7 +85,7 @@ section {
 
 .product img {
   width:100%;
-  height:160px; /* altura uniforme */
+  height:160px;
   object-fit:cover;
   border-radius:8px;
 }
@@ -95,15 +93,20 @@ section {
 .product h3 {
   margin:12px 0 8px 0;
   font-size:16px;
-  min-height:40px; /* espacio mínimo para título */
+  min-height:40px;
 }
 
 .product p {
   font-size:14px;
   color:#444;
-  min-height:60px; /* espacio uniforme para descripción */
   margin:8px 0;
+  min-height:60px; /* espacio mínimo para que las tarjetas cortas no se vean chicas */
   overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:4; /* límite de líneas */
+  -webkit-box-orient:vertical;
+  text-overflow:ellipsis;
+  flex-grow:1; /* hace que todas las descripciones ocupen el espacio disponible */
 }
 
 .stars {
@@ -200,7 +203,7 @@ function mostrarProductos() {
       ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
       <img src="${p.imagen}" alt="${p.titulo}" />
       <h3>${p.titulo}</h3>
-      <p>${p.descripcion}</p>
+      <p title="${p.descripcion}">${p.descripcion}</p>
       <div class="stars">${estrellas} <span style="color:#ccc;font-size:14px;">(${p.rating} • ${p.reviews} calificaciones)</span></div>
       <div class="price">$${p.precio} MXN</div>
       <a href="${p.link}" target="_blank"><button>Ver en Mercado Libre</button></a>
