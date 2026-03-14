@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rifa Album BTS | ETER KPOP MX</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#121212;color:white;}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;background:linear-gradient(90deg,#7b5cff,#b44cff);}
+.logo{display:flex;align-items:center;gap:8px;font-weight:bold;font-size:20px;}
+.logo img{height:22px;width:22px;border-radius:4px;}
+nav.nav-buttons{display:flex;gap:16px;font-weight:bold;}
+nav.nav-buttons a{color:white;text-decoration:none;padding:8px 14px;border-radius:8px;background: rgba(123,92,255,0.2);transition: all 0.2s ease;}
+nav.nav-buttons a:hover{background:#7b5cff;color:white;transform: scale(1.05);}
+.hero{text-align:center;padding:60px 20px;background-image: url('https://http2.mlstatic.com/D_NQ_NP_2X_867895-MLA99578718932_122025-F.webp');background-size: cover;background-position: center;position: relative;color:white;}
+.hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background: rgba(0,0,0,0.6);z-index:0;}
+.hero h1, .hero p{position: relative; z-index:1; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);}
+.hero h1{ font-size:36px; margin-bottom:10px;}
+.hero p{ font-size:18px;}
+.producto{max-width:900px;margin:auto;padding:20px;text-align:center;}
+.slider-container{position:relative;max-width:400px;margin:auto;}
+.slider-container img{width:100%;border-radius:15px;transition:opacity 0.5s ease;}
+.slider-buttons{display:flex;justify-content:space-between;position:absolute;top:50%;width:100%;transform:translateY(-50%);}
+.slider-buttons button{background:rgba(123,92,255,0.5);border:none;color:white;padding:8px 12px;border-radius:50%;cursor:pointer;transition:all 0.2s ease;}
+.slider-buttons button:hover{background:#7b5cff;}
+.formulario{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:10px;padding:20px;}
+.formulario input{padding:12px;border-radius:6px;border:none;font-size:16px;}
+.boletos{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:10px;max-width:900px;margin:auto;padding:20px;position:relative;}
+.boleto{padding:18px;font-size:16px;border-radius:12px;cursor:pointer;text-align:center;font-weight:bold;z-index:1;position:relative;overflow:hidden;transition:all 0.2s ease;}
+.boleto:hover:not(.apartado):not(.pagado){transform: scale(1.05);box-shadow: 0 0 10px #7b5cff;}
+.disponible{ background:#2a2a2a; }
+.seleccionado{ background:#7b5cff; box-shadow:0 0 15px #ff00ff; animation: pop 0.3s ease; }
+.apartado{ background:#f1c40f; color:black; cursor:not-allowed; }
+.pagado{ background:#e74c3c; cursor:not-allowed; }
+@keyframes pop{0%{transform: scale(0.8);}50%{transform: scale(1.1);}100%{transform: scale(1);}}
+.spinnerBoleto{border: 2px solid rgba(255,255,255,0.3);border-top: 2px solid white;border-radius: 50%;width: 16px;height: 16px;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);animation: spin 1s linear infinite;z-index:10;}
+@keyframes spin{0%{transform: rotate(0deg);}100%{transform: rotate(360deg);}}
+.panel{text-align:center;padding:20px;}
+button{background:#7b5cff;border:none;padding:14px 28px;border-radius:10px;color:white;font-size:16px;cursor:pointer;position:relative;transition: all 0.2s ease;}
+button:hover:not(:disabled){transform: scale(1.05); box-shadow:0 0 15px #ff00ff;}
+button:disabled{opacity:0.7; cursor:not-allowed;}
+.spinner{border: 3px solid rgba(255,255,255,0.3);border-top: 3px solid white;border-radius: 50%;width: 18px;height: 18px;animation: spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-left:8px;}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:100;backdrop-filter: blur(5px);}
+.modal-content{background:#2a2a2a;padding:30px;border-radius:15px;text-align:center;max-width:400px;width:90%;animation: pop 0.3s ease;}
+.modal-content p{margin:10px 0;}
+.modal-content button{margin-top:15px;}
+footer{background:#1c1c26;text-align:center;padding:25px;margin-top:40px;}
+.legal{font-size:12px;color:#aaa;max-width:900px;margin:auto;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">
+  <img src="https://yt3.ggpht.com/rGD4n7Nq_CQfuIV0Ig_iIIbv30gVoKEcqcn1tsbWKZVWBA9Ni1W5TVhp5vRMKplK0uBK7S4Ikw=s600-c-k-c0x00ffffff-no-rj-rp-mo">
+  <span>ETER KPOP MX</span>
+</div>
+<nav class="nav-buttons">
+  <a href="index.html">Inicio</a>
+  <a href="tienda.html">Tienda</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Rifa Album BTS - Skool Luv Affair</h1>
+<p>¡Participa y gana este increíble álbum con photo cards oficiales!</p>
+</section>
+
+<section class="producto">
+<h2>Album BTS - Skool Luv Affair Original</h2>
+<p>Photo cards oficiales de BTS. ¡Participa en la rifa y gana este increíble artículo!</p>
+<div class="slider-container">
+  <img src="https://http2.mlstatic.com/D_NQ_NP_2X_867895-MLA99578718932_122025-F.webp" alt="Album BTS 1">
+  <img src="https://http2.mlstatic.com/D_NQ_NP_2X_809290-MLA89947582437_082025-F.webp" alt="Album BTS 2" style="display:none;">
+  <div class="slider-buttons">
+    <button id="prev">&lt;</button>
+    <button id="next">&gt;</button>
+  </div>
+</div>
+<p>Boletos a $10 MXN cada uno</p>
+</section>
+
+<div class="formulario">
+<input id="nombre" placeholder="Tu nombre">
+<input id="telefono" placeholder="Tu teléfono">
+</div>
+
+<h2 style="text-align:center">Selecciona tus boletos</h2>
+<div class="boletos"></div>
+
+<div class="panel">
+<p id="seleccion">Boleto número: ninguno</p>
+<p id="total">Total: $0 MXN</p>
+<button id="accion">Apartar boletos</button>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>Boletos apartados</h3>
+    <p id="modalBoletos"></p>
+    <p id="modalTotal"></p>
+    <p><b>Tus boletos estarán apartados durante 12 horas. Después de eso volverán a estar disponibles si no se completa el pago.</b></p>
+    <button id="modalWhats">Ir a pagar</button>
+  </div>
+</div>
+
+<footer>
+<p>© 2026 DEDIKA STUDIO</p>
+<p class="legal">
+Aviso: Esta rifa es con fines de entretenimiento y no constituye venta directa de productos. 
+ETER KPOP MX no se responsabiliza por compras, envíos ni garantías de productos externos. 
+La realización de esta rifa está sujeta a la venta mínima del 50% de los boletos. 
+Si no se alcanza este mínimo, los boletos serán reembolsados y la rifa no se realizará. 
+Al participar, aceptas los términos aquí descritos y que el producto pertenece a sus respectivos propietarios.
+</p>
+</footer>
+
+<script>
+const API="https://script.google.com/macros/s/AKfycbzGp414g9GHNmgzl3w8MiabHEhqkOmxmo-2GOOSGhAO6h0DQCw-KvzZoUpBwLsHkW-zxg/exec";
+const contenedor=document.querySelector(".boletos");
+const textoSeleccion=document.getElementById("seleccion");
+const textoTotal=document.getElementById("total");
+const boton=document.getElementById("accion");
+const modal=document.getElementById("modal");
+const modalBoletos=document.getElementById("modalBoletos");
+const modalTotal=document.getElementById("modalTotal");
+const botonWhats=document.getElementById("modalWhats");
+
+let seleccionados=[];
+let precio=10;
+let reservados=false;
+
+/* CREAR BOLETOS */
+for(let i=1;i<=200;i++){
+  let numero=i.toString();
+  let div=document.createElement("div");
+  div.classList.add("boleto","disponible");
+  div.textContent=numero;
+  
+  div.onclick = async function() {
+    if(div.classList.contains("apartado") || div.classList.contains("pagado")) return;
+    if(reservados) return;
+
+    const spinnerB=document.createElement("span");
+    spinnerB.classList.add("spinnerBoleto");
+    div.appendChild(spinnerB);
+
+    try {
+      let res = await fetch(API);
+      let data = await res.json();
+      const vistos={};
+      data.reverse().forEach(x=>{if(!vistos[x.boleto])vistos[x.boleto]=x.estado.toLowerCase();});
+      let estadoReal = vistos[numero];
+      if(estadoReal==="apartado" || estadoReal==="pagado"){
+        div.classList.remove("disponible");
+        div.classList.add(estadoReal==="apartado"?"apartado":"pagado");
+        div.onclick=null;
+        alert("Este boleto ya está apartado o pagado.");
+        return;
+      }
+    }catch(e){ console.log("Error verificando boleto",e); }
+    finally{ if(div.contains(spinnerB)) div.removeChild(spinnerB); }
+
+    if(seleccionados.includes(numero)){
+      seleccionados=seleccionados.filter(n=>n!==numero);
+      div.classList.remove("seleccionado");
+    } else {
+      seleccionados.push(numero);
+      div.classList.add("seleccionado");
+    }
+    actualizar();
+  };
+  contenedor.appendChild(div);
+}
+
+/* ACTUALIZAR PANEL */
+function actualizar(){
+  if(seleccionados.length===0){
+    textoSeleccion.textContent="Boleto número: ninguno";
+    textoTotal.textContent="Total: $0 MXN";
+    return;
+  }
+  let total=seleccionados.length*precio;
+  textoSeleccion.textContent="Boleto número: "+seleccionados.join(", ");
+  textoTotal.textContent="Total: $"+total+" MXN";
+}
+
+/* CARGAR BOLETOS */
+async function cargarBoletos(){
+  try{
+    let res=await fetch(API);
+    let data=await res.json();
+    const vistos={};
+    data.reverse().forEach(x=>{if(!vistos[x.boleto])vistos[x.boleto]=x.estado.toLowerCase();});
+    document.querySelectorAll(".boleto").forEach(b=>{
+      let numero=b.textContent;
+      let estado=vistos[numero];
+      if(estado==="apartado"){b.classList.remove("disponible");b.classList.add("apartado");b.onclick=null;}
+      if(estado==="pagado"){b.classList.remove("disponible");b.classList.add("pagado");b.onclick=null;}
+    });
+  }catch(e){ console.log("error cargando boletos",e); }
+}
+
+cargarBoletos();
+
+/* BOTON APARTAR */
+boton.onclick=async function(){
+  let nombre=document.getElementById("nombre").value;
+  let telefono=document.getElementById("telefono").value;
+  if(!nombre || !telefono){ alert("Debes llenar nombre y teléfono"); return; }
+  if(seleccionados.length===0){ alert("Selecciona al menos un boleto"); return; }
+
+  boton.disabled=true;
+  const spinner=document.createElement("span");
+  spinner.classList.add("spinner");
+  boton.appendChild(spinner);
+
+  if(!reservados){
+    try{
+      let ahora = new Date();
+      let fechaApartado = ahora.toISOString(); // fecha de apartado para 12 horas
+      let datos={boletos:seleccionados,nombre:nombre,telefono:telefono,apartado:fechaApartado};
+      await fetch(API,{method:"POST",body:JSON.stringify(datos)});
+
+      modalBoletos.textContent="Boleto número: "+seleccionados.join(", ");
+      modalTotal.textContent="Total a pagar: $"+(seleccionados.length*precio)+" MXN";
+      modal.style.display="flex";
+
+      reservados=true;
+    }catch(e){
+      alert("Error al apartar boletos, intenta de nuevo");
+      console.log(e);
+    } finally {
+      boton.disabled=false;
+      if(boton.contains(spinner)) boton.removeChild(spinner);
+    }
+    return;
+  }
+};
+
+/* BOTON IR A PAGAR */
+botonWhats.onclick=function(){
+  let total=seleccionados.length*precio;
+  let mensaje=`Hola, aparté boletos de la rifa de las tarjetas BTS - Skool Luv Affair.
+Boleto número: ${seleccionados.join(", ")}
+Total a pagar: $${total} MXN
+Tus boletos estarán apartados durante 12 horas. Enviaré el comprobante cuando pague.`;
+  let url="https://wa.me/526571921509?text="+encodeURIComponent(mensaje);
+  window.open(url,"_blank");
+};
+
+/* SLIDER */
+const imgs=document.querySelectorAll('.slider-container img');
+let current=0;
+document.getElementById('prev').onclick=function(){
+  imgs[current].style.display='none';
+  current=(current-1+imgs.length)%imgs.length;
+  imgs[current].style.display='block';
+}
+document.getElementById('next').onclick=function(){
+  imgs[current].style.display='none';
+  current=(current+1)%imgs.length;
+  imgs[current].style.display='block';
+}
+
+/* CONFETTI */
+function lanzarConfetti(){
+  for(let i=0;i<30;i++){
+    let div=document.createElement('div');
+    div.style.position='fixed';
+    div.style.width='10px';
+    div.style.height='10px';
+    div.style.backgroundColor=['#ff0','#0ff','#f0f','#fff','#7b5cff'][Math.floor(Math.random()*5)];
+    div.style.left=Math.random()*window.innerWidth+'px';
+    div.style.top='-20px';
+    div.style.opacity=Math.random();
+    div.style.borderRadius='50%';
+    div.style.zIndex=200;
+    document.body.appendChild(div);
+    let velocidad=2+Math.random()*3;
+    let id=setInterval(()=>{
+      let top=parseFloat(div.style.top);
+      div.style.top=top+velocidad+'px';
+      if(top>window.innerHeight){
+        div.remove();
+        clearInterval(id);
+      }
+    },16);
+  }
+}
+</script>
+</body>
+</html>
