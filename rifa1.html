@@ -190,6 +190,24 @@ button:hover {
   font-weight: 600;
 }
 
+  /* Spinner circular */
+.spinner {
+  border: 4px solid rgba(0,0,0,0.1);
+  border-top: 4px solid #7b5cff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* ------------------- Footer ------------------- */
 footer {
   background: #4b4bff; /* azul discreto */
@@ -477,8 +495,33 @@ if(seleccionados.length===0){
 alert("Selecciona al menos un boleto");
 
 return;
+  }
+  // Mostrar estado "Apartando..." y spinner
+  const originalText = boton.textContent;
+  boton.disabled = true;
+  boton.innerHTML = 'Apartando <span class="spinner"></span>';
 
-}
+  let datos = {
+    boletos: seleccionados,
+    nombre: nombre,
+    telefono: telefono
+  };
+
+  try {
+    await fetch(API, { method: "POST", body: JSON.stringify(datos) });
+
+    modalBoletos.textContent = "Boletos: " + seleccionados.join(", ");
+    modalTotal.textContent = "Total: $" + (seleccionados.length*precio) + " MXN";
+    modal.style.display = "flex";
+  } catch(e) {
+    alert("Ocurrió un error al apartar los boletos");
+    console.log(e);
+  } finally {
+    // Restaurar botón
+    boton.disabled = false;
+    boton.textContent = originalText;
+  }
+};
 
 let datos={
 
